@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    machine: true
     docker:
       - image: debian:stretch
 
@@ -11,6 +12,6 @@ jobs:
           name: Greeting
           command: ls -ltrh
 
-      - run:
-          name: Print the Current Time
-          command: date
+      - build:
+          name: Build First docker
+          command: docker build -t yanivomc/netapp:$CIRCLE_BUILD_NUM .
