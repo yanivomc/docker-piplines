@@ -18,4 +18,9 @@ jobs: # a collection of steps
           command: |
             sudo docker build  -t yanivomc .
 
-    
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      #- test
