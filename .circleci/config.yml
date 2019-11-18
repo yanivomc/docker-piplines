@@ -3,10 +3,6 @@ jobs:
   build:
     docker:
       - image: debian:stretch
-    branches:
-      only:
-        advanced
-        master
 
     steps:
       - checkout
