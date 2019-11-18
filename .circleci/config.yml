@@ -1,17 +1,21 @@
 version: 2
-jobs:
+jobs: # a collection of steps
   build:
-    machine: true
     docker:
-      - image: debian:stretch
-
-    steps:
+      - image: circleci/php:7.0.22-apache-node #
+    steps: # a set of executable commands
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: |
+          ls -ltrh 
+            #echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+          #docker run -d --name db company/proprietary-db:1.2.3
 
+      # build the application image
       - run:
-          name: Greeting
-          command: ls -ltrh
+          name: Build Docker image
+          command: |
+            sudo docker build  -t yanivomc .
 
-      - build:
-          name: Build First docker
-          command: docker build -t yanivomc/netapp:$CIRCLE_BUILD_NUM .
+    
