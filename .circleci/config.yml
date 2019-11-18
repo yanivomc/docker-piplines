@@ -1,26 +1,20 @@
 version: 2
-jobs: # a collection of steps
+jobs:
   build:
     docker:
-      - image: circleci/php:7.0.22-apache-node #
-    steps: # a set of executable commands
+      - image: debian:stretch
+    branches:
+      only:
+        advanced
+        master
+
+    steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: |
-          ls -ltrh 
-            #echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-          #docker run -d --name db company/proprietary-db:1.2.3
 
-      # build the application image
       - run:
-          name: Build Docker image
-          command: |
-            sudo docker build  -t yanivomc .
+          name: Greeting
+          command: echo Hello, world.
 
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      #- test
+      - run:
+          name: Print the Current Time
+          command: date
