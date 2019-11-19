@@ -11,7 +11,7 @@ RUN dotnet restore
 COPY . .
 
 RUN dotnet test --verbosity=normal --results-directory /TestResults/ --logger "trx;LogFileName=test_results.xml" ./Tests/Tests.csproj
-RUN dotnet tool install -g trx2junit && export PATH="$PATH:/root/.dotnet/tools" && trx2junit /TestResults/*.xml 
+RUN dotnet tool install -g trx2junit && export PATH="$PATH:/root/.dotnet/tools" && trx2junit /TestResults/*.xml --output /test/ 
 
 RUN dotnet publish ./AccountOwnerServer/AccountOwnerServer.csproj -o /publish/
 
@@ -21,7 +21,7 @@ WORKDIR /publish
 
 COPY --from=build-image /publish .
 
-COPY --from=build-image /TestResults /TestResults
+COPY --from=build-image /test /TestResults
 
 ENV TEAMCITY_PROJECT_NAME = ${TEAMCITY_PROJECT_NAME}
 
