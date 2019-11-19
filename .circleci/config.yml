@@ -53,6 +53,14 @@ jobs:
           command: |
             sed -i 's/piplineapp:.*/piplineapp:'"$CIRCLE_BUILD_NUM"'/g' k8s/deployments/deployments.yaml
 
+      - run:
+          name: push Deployment Yaml changes
+          command: |
+            git config user.email "yanivomc@gmail.com"
+            git config user.name "yanivomc"
+            git commit -m "UPDATING K8S Yaml From CI [ci skip]" 
+            git push https://$GIT_USER:$GIT_PASSWORD@github.com/yanivomc/docker-piplines.git
+
 
 
       - store_test_results:
