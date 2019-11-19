@@ -29,7 +29,7 @@ jobs:
           name: Pusblish UT Reports
           command: |
            docker run -d --rm --name app1 yanivomc/piplineapp:B$CIRCLE_BUILD_NUM
-           docker cp app1:/TestResults/test_results.xml test_results.xml
+           docker cp app1:/TestResults/*.xml test_results.xml
            docker stop app1
            apk add --no-cache ca-certificates
            pwd
