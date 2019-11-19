@@ -20,4 +20,17 @@ jobs:
       - run:
           name: Build & UnitTest
           command: |
-           docker build -t accountownerapp:B1 -f Dockerfile .
+           docker build -t yanivomc/piplineapp:B$CIRCLE_BUILD_NUM -f Dockerfile .
+           echo "Starting Integration Test"
+           docker build -t yanivomc/piplineapp:test-B$CIRCLE_BUILD_NUM -f Dockerfile.Integration .
+
+      - run:
+          name: Pusblish UT Reports
+          command: |
+           docker run -d --rm --name app1 yanivomc/piplineapp:B$CIRCLE_BUILD_NUM
+           docker cp app1:/TestResults/test_results.xml test_results.xml
+           docker stop app1
+           ls -ltrh
+
+      - store_test_results:
+          path: ./test_results.xml
