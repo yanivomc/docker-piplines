@@ -2,15 +2,22 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: docker/compose
 
     steps:
       - checkout
 
+      # - setup_remote_docker:   # (2)
+      #     docker_layer_caching: true # (3)
+      
       - run:
-          name: Greeting
-          command: ls -ltrh
+          name: View folders
+          command: | 
+            set -x 
+            ls -ltrh
+
 
       - run:
-          name: Print the Current Time
-          command: docker build -t yanivomc .
+          name: Build & UnitTest
+          command: |
+           docker build -t accountownerapp:B1 -f Dockerfile .
