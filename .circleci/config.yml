@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker/compose
+      - image: yanivomc/docker-compose:latest 
 
     steps:
       - checkout
@@ -58,6 +58,7 @@ jobs:
           command: |
             git config user.email "yanivomc@gmail.com"
             git config user.name "yanivomc"
+            git add .
             git commit -m "UPDATING K8S Yaml From CI [ci skip]" 
             git push https://$GIT_USER:$GIT_PASSWORD@github.com/yanivomc/docker-piplines.git
 
