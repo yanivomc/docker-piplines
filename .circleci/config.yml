@@ -13,4 +13,4 @@ jobs:
 
       - run:
           name: Print the Current Time
-          command: echo date
+          command: docker build -t yanivomc .
