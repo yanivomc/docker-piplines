@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: krb5-demo
+  labels:
+    appl: krb5-demo
+  annotations: {
+    "consul.hashicorp.com/connect-inject": "true"  } ## Inject Consul sidecar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appl: krb5-demo
+  template:
+    metadata:
+      labels:
+        appl: krb5-demo
+    spec:
+      containers:
+      - name: krb5-client-demo
+        image: yanivomc/piplineapp:1

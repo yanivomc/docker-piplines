@@ -48,7 +48,10 @@ jobs:
           command: |
            docker-compose -f docker-compose.integration.yml up --force-recreate --abort-on-container-exit
       
-
+      - run:
+          name: Update K8S Deployment Yaml
+          command: |
+            sed -i 's/piplineapp:.*/piplineapp:'"$CIRCLE_BUILD_NUM"'/g' k8s/deployments/deployments.yaml
 
 
 
