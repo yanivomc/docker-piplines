@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore-build as build-image
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1 as build-image
 
 WORKDIR /home/app
 
@@ -11,6 +11,7 @@ RUN dotnet restore
 COPY . .
 
 RUN dotnet test --verbosity=normal --results-directory /TestResults/ --logger "trx;LogFileName=test_results.xml" ./Tests/Tests.csproj
+RUN dotnet tool install -g trx2junit && export PATH="$PATH:/root/.dotnet/tools" && trx2junit /TestResults/*.xml 
 
 RUN dotnet publish ./AccountOwnerServer/AccountOwnerServer.csproj -o /publish/
 
