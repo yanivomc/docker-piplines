@@ -1,4 +1,5 @@
 **/volume*
+/TestsResults/*
 /AccountOwnerServer/obj
 /AccountOwnerServer/bin
 /AccountOwnerServer/Projects

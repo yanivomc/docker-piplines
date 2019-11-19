@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<testsuites>
-  <testsuite name="Tests" hostname="a544e4405b5b" package="not available" id="0" tests="1" failures="0" errors="0" skipped="0" time="0.280" timestamp="2019-11-19T21:50:36">
-    <properties />
-    <testcase name="Tests.OwnerRepositoryTests.GetAllOwners_ReturnsListOfOwners_WithSingleOwner" classname="Tests" time="0.280" />
-    <system-out />
-    <system-err />
-  </testsuite>
-</testsuites>
