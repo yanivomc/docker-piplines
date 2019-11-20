@@ -54,7 +54,7 @@ jobs:
             git config user.email "yanivomc@gmail.com"
             git config user.name "yanivomc"
             git pull
-            sed -i 's/piplineapp:.*/piplineapp:'"$CIRCLE_BUILD_NUM"'/g' k8s/deployments/deployments.yaml
+            sed -i 's/piplineapp:B.*/piplineapp:B'"$CIRCLE_BUILD_NUM"'/g' k8s/deployments/deployments.yaml
 
       - run:
           name: push Deployment Yaml changes
