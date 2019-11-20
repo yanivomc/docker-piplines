@@ -9,7 +9,7 @@ RUN for file in $(ls *.csproj); do mkdir -p ./${file%.*}/ && mv $file ./${file%.
 RUN dotnet restore
 
 COPY . .
-
+RUN echo starting test
 RUN dotnet test --verbosity=normal --results-directory /TestResults/ --logger "trx;LogFileName=test_results.xml" ./Tests/Tests.csproj
 RUN dotnet tool install -g trx2junit && export PATH="$PATH:/root/.dotnet/tools" && trx2junit /TestResults/*.xml --output /test/ 
 
