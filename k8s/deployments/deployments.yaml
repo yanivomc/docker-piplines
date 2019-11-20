@@ -17,4 +17,4 @@ spec:
     spec:
       containers:
       - name: piplineapp-client-demo
-        image: yanivomc/piplineapp:34
+        image: yanivomc/piplineapp:36
