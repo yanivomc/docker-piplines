@@ -6,7 +6,7 @@ metadata:
   labels:
     appl: piplineapp-demo
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       appl: piplineapp-demo
