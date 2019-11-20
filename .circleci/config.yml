@@ -17,31 +17,31 @@ jobs:
             ls -ltrh
 
 
-      # - run:
-      #     name: Build & UnitTest
-      #     command: |
-      #      docker build -t yanivomc/piplineapp:B$CIRCLE_BUILD_NUM -f Dockerfile .
-      #      echo "Starting Integration Test"
-      #      docker build -t yanivomc/integration-piplineapp:B$CIRCLE_BUILD_NUM -f Dockerfile.Integration .
-      # - run:
-      #     name: Pusblish UT Reports
-      #     command: |
-      #      docker run -d --rm --name app1 yanivomc/piplineapp:B$CIRCLE_BUILD_NUM
-      #      docker cp app1:/TestResults TestResults
-      #      docker stop app1
-      #      apk add --no-cache ca-certificates
-      #      pwd
-      #      ls -ltrh
+      - run:
+          name: Build & UnitTest
+          command: |
+           docker build -t yanivomc/piplineapp:B$CIRCLE_BUILD_NUM -f Dockerfile .
+           echo "Starting Integration Test"
+           docker build -t yanivomc/integration-piplineapp:B$CIRCLE_BUILD_NUM -f Dockerfile.Integration .
+      - run:
+          name: Pusblish UT Reports
+          command: |
+           docker run -d --rm --name app1 yanivomc/piplineapp:B$CIRCLE_BUILD_NUM
+           docker cp app1:/TestResults TestResults
+           docker stop app1
+           apk add --no-cache ca-certificates
+           pwd
+           ls -ltrh
 
-      # - run:
-      #     name: Push to Repo
-      #     command: |
-      #      docker login -u $DOCKER_USER -p $DOCKER_PASS 
-      #      docker push yanivomc/piplineapp:B$CIRCLE_BUILD_NUM
-      #      docker tag yanivomc/piplineapp:B$CIRCLE_BUILD_NUM yanivomc/piplineapp:latest
-      #      docker push yanivomc/piplineapp:latest
-      #      docker tag yanivomc/integration-piplineapp:B$CIRCLE_BUILD_NUM yanivomc/integration-piplineapp:latest
-      #      docker push yanivomc/integration-piplineapp:latest
+      - run:
+          name: Push to Repo
+          command: |
+           docker login -u $DOCKER_USER -p $DOCKER_PASS 
+           docker push yanivomc/piplineapp:B$CIRCLE_BUILD_NUM
+           docker tag yanivomc/piplineapp:B$CIRCLE_BUILD_NUM yanivomc/piplineapp:latest
+           docker push yanivomc/piplineapp:latest
+           docker tag yanivomc/integration-piplineapp:B$CIRCLE_BUILD_NUM yanivomc/integration-piplineapp:latest
+           docker push yanivomc/integration-piplineapp:latest
 
       - run:
           name: Integration Tests Latest Version
